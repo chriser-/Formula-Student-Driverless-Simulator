@@ -163,6 +163,8 @@ private:
 private:
     Params params_;
 
+    float dt_;
+
     std::unique_ptr<msr::airlib::CarApiBase> vehicle_api_;
     ACarPawn* pawn_;
     UWheeledVehicleMovementComponent* movement_;

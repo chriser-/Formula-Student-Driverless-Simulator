@@ -55,6 +55,8 @@ void CarPawnSimApi::initialize()
     params_.pawn_events->getCollisionSignal().connect_member(this, &CarPawnSimApi::onCollision);
     params_.pawn_events->getPawnTickSignal().connect_member(this, &CarPawnSimApi::pawnTick);
 
+    dt_ = 0.0f;
+
     createVehicleApi(static_cast<ACarPawn*>(params_.pawn), params_.home_geopoint);
 
     //TODO: should do reset() here?
@@ -573,6 +575,12 @@ bool CarPawnSimApi::canTeleportWhileMove()  const
 
 void CarPawnSimApi::updateKinematics(float dt)
 {
+    dt_ += dt;
+    if (dt_ < 0.05f) {
+        return;
+    }
+    dt = dt_;
+    dt_ = 0.0f;
     //update kinematics from pawn's movement instead of physics engine
 
     auto next_kinematics = kinematics_->getState();

@@ -74,6 +74,7 @@ void AAirSimGameMode::BeginPlay()
     }
 
     Super::BeginPlay();
+    this->GetWorld()->GetFirstPlayerController()->ClientSetHUD(HUDClass);
 }
 
 void AAirSimGameMode::EndPlay(const EEndPlayReason::Type EndPlayReason)
